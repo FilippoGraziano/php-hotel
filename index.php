@@ -56,7 +56,7 @@ $hotels = [
     <title>Hotels</title>
 </head>
 
-<body class="p-5">
+<body class="p-10">
 
     <h1 class="mb-10">Hotels</h1>
 

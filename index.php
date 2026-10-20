@@ -91,44 +91,55 @@ $voteGetNumber = (int) $voteGet == 0 ? null : (int) $voteGet;
         </tr>
 
         <?php
-        
-        // var_dump($parkingGet);
-        // var_dump($voteGet);
 
         $filteredHotel = [];
 
         foreach ($hotels as $hotel) {
 
-            if ($voteGetNumber == null && $hotel["parking"] == $parkingGet) {
+            if ($hotel["vote"] >= $voteGetNumber) {
 
-                array_push($filteredHotel, $hotel);
-
-            } else if ($hotel["vote"] >= $voteGetNumber && $hotel["parking"] == $parkingGet) {
-
-                array_push($filteredHotel, $hotel);
-
-            };
-
+                if (!$parkingGet || $hotel["parking"] == true) {
+                    array_push($filteredHotel, $hotel);
+                }
+            }
         };
 
-        var_dump($filteredHotel);
+        if (count($filteredHotel) === 0) {
+            foreach ($hotels as $hotel) {
 
-        foreach ($hotels as $hotel) {
+                echo "<tr>";
 
-            echo "<tr>";
+                foreach ($hotel as $key => $value) {
 
-            foreach ($hotel as $key => $value) {
-
-                if ($key == "parking" && $value) {
-                    echo "<td> Yes </td>";
-                } else if ($key == "parking" && !$value) {
-                    echo "<td> No </td>";
-                } else {
-                    echo "<td> $value </td>";
+                    if ($key == "parking" && $value) {
+                        echo "<td> Yes </td>";
+                    } else if ($key == "parking" && !$value) {
+                        echo "<td> No </td>";
+                    } else {
+                        echo "<td> $value </td>";
+                    };
                 };
-            };
 
-            echo "</tr>";
+                echo "</tr>";
+            };
+        } else {
+            foreach ($filteredHotel as $hotel) {
+
+                echo "<tr>";
+
+                foreach ($hotel as $key => $value) {
+
+                    if ($key == "parking" && $value) {
+                        echo "<td> Yes </td>";
+                    } else if ($key == "parking" && !$value) {
+                        echo "<td> No </td>";
+                    } else {
+                        echo "<td> $value </td>";
+                    };
+                };
+
+                echo "</tr>";
+            };
         };
 
         ?>

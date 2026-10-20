@@ -40,6 +40,10 @@ $hotels = [
 
 ];
 
+$parkingGet = $_GET["parking"] ?? false ? true : false;
+$voteGet = $_GET["vote"] ?? 0;
+$voteGetNumber = (int) $voteGet == 0 ? null : (int) $voteGet;
+
 ?>
 
 <!DOCTYPE html>
@@ -60,6 +64,22 @@ $hotels = [
 
     <h1 class="mb-10">Hotels</h1>
 
+    <form method="GET">
+
+        <label>
+            Has Parking
+            <input type="checkbox" name="parking">
+        </label>
+
+        <label>
+            Vote:
+            <input type="number" name="vote" min="1" max="5">
+        </label>
+
+        <button type="submit">Filter</button>
+
+    </form>
+
     <table class="table table-striped table-bordered">
 
         <tr>
@@ -71,6 +91,27 @@ $hotels = [
         </tr>
 
         <?php
+        
+        // var_dump($parkingGet);
+        // var_dump($voteGet);
+
+        $filteredHotel = [];
+
+        foreach ($hotels as $hotel) {
+
+            if ($voteGetNumber == null && $hotel["parking"] == $parkingGet) {
+
+                array_push($filteredHotel, $hotel);
+
+            } else if ($hotel["vote"] >= $voteGetNumber && $hotel["parking"] == $parkingGet) {
+
+                array_push($filteredHotel, $hotel);
+
+            };
+
+        };
+
+        var_dump($filteredHotel);
 
         foreach ($hotels as $hotel) {
 

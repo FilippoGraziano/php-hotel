@@ -64,23 +64,27 @@ $voteGetNumber = (int) $voteGet == 0 ? null : (int) $voteGet;
 
     <h1 class="mb-10">Hotels</h1>
 
-    <form method="GET">
+    <form method="GET" class="mb-5 d-flex align-items-center">
 
-        <label>
-            Has Parking
-            <input type="checkbox" name="parking">
-        </label>
+        <div class="form-field">
 
-        <label>
+            <div class="switch theme-accent">
+                <input type="checkbox" name="parking" id="check" role="switch" switch>
+            </div>
+            <label for="check">Has Parking</label>
+
+        </div>
+
+        <label class="ms-5">
             Vote:
-            <input type="number" name="vote" min="1" max="5">
+            <input type="number" name="vote" min="1" max="5" class="border rounded">
         </label>
 
-        <button type="submit">Filter</button>
+        <button type="submit" class="btn btn-outline theme-accent ms-5">Filter</button>
 
     </form>
 
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered border-accent">
 
         <tr>
             <th scope="col">Name</th>

@@ -100,50 +100,23 @@ $voteGetNumber = (int) $voteGet == 0 ? null : (int) $voteGet;
 
         foreach ($hotels as $hotel) {
 
-            if ($hotel["vote"] >= $voteGetNumber) {
+            if ($hotel["vote"] < $voteGetNumber) continue;
+            if ($parkingGet && !$hotel["parking"]) continue;
 
-                if (!$parkingGet || $hotel["parking"] == true) {
-                    array_push($filteredHotel, $hotel);
-                }
-            }
-        };
+            echo "<tr>";
 
-        if (count($filteredHotel) === 0) {
-            foreach ($hotels as $hotel) {
+            foreach ($hotel as $key => $value) {
 
-                echo "<tr>";
-
-                foreach ($hotel as $key => $value) {
-
-                    if ($key == "parking" && $value) {
-                        echo "<td> Yes </td>";
-                    } else if ($key == "parking" && !$value) {
-                        echo "<td> No </td>";
-                    } else {
-                        echo "<td> $value </td>";
-                    };
+                if ($key == "parking" && $value) {
+                    echo "<td> Yes </td>";
+                } else if ($key == "parking" && !$value) {
+                    echo "<td> No </td>";
+                } else {
+                    echo "<td> $value </td>";
                 };
-
-                echo "</tr>";
             };
-        } else {
-            foreach ($filteredHotel as $hotel) {
 
-                echo "<tr>";
-
-                foreach ($hotel as $key => $value) {
-
-                    if ($key == "parking" && $value) {
-                        echo "<td> Yes </td>";
-                    } else if ($key == "parking" && !$value) {
-                        echo "<td> No </td>";
-                    } else {
-                        echo "<td> $value </td>";
-                    };
-                };
-
-                echo "</tr>";
-            };
+            echo "</tr>";
         };
 
         ?>
